@@ -45,7 +45,7 @@ public class Arraystr {
                 arrayf[i][j] = i + j;
             }
         }
-        //no 使用Arrays.fill()方法初始化一个3x3的二维数组，并为每个元素赋值为1。
+        // no 使用Arrays.fill()方法初始化一个3x3的二维数组，并为每个元素赋值为1。
         int[][] array1 = new int[3][3];
         for (int[] row : array1) {
             // r 调用arrays包fill()方法
@@ -286,26 +286,37 @@ class Stringsbb {
 // b ---------------------------------增 add() addElement()
 // o 向向量中添加元素 add() 或 addElement() 方法. add() 方法返回一个 boolean 值，表示是否添加成功，
 // addElement() 方法则无返回值。
+// o insertElementAt( obj, int )是Java中Vector类中的一个方法，用于在指定位置插入一个元素到向量中
 // b ---------------------------------删 remove() 或 removeElement()
 // o 从向量中删除元素 remove() 或 removeElement() 方法从向量中删除元素。remove() 方法返回被删除的元素，
-//o removeElement(obj) 方法则返回一个 boolean 值，表示是否删除成功。
+// o removeElement(obj) 方法则返回一个 boolean 值，表示是否删除成功。
 // remove(int index): 删除指定索引位置的元素，并返回该元素的值。
-//o removeElementAt(int index)方法从Vector中删除指定索引处的元素，并不返回已删除的元素。
-//o removeAllElement() 方法，用于从向量中删除所有元素，使向量为空 
+// o removeElementAt(int index)方法从Vector中删除指定索引处的元素，并不返回已删除的元素。
+// o removeAllElement() 方法，用于从向量中删除所有元素，使向量为空
 // r 官方文档clear()方法代替removeAllElements()方法
-// removeAll(Collection<?> c): 删除向量中包含在指定集合中的所有元素，并返回一个布尔值，指示是否已成功删除所有元素。
-
+// r clear()是Java中List、Set、Map等集合类型中的一个方法，用于清空集合中的所有元素，使其变为空集合。
+// no removeAll(Collection<?> c): 删除向量中包含在指定集合中的所有元素，并返回一个布尔值，指示是否已成功删除所有元素。
+/*
+ * Vector<String> vector = new Vector<>();
+ * vector.add("A"); * vector.add("B"); * vector.add("C");
+ * List<String> list = new ArrayList<>();
+ * list.add("A"); * list.add("B");
+ * vector.removeAll(list);
+ */
+// Collection<?>c是一个泛型参数，通常用于指定一个集合对象。
+// Collection是一个接口，它是所有集合类型的根接口，包括List、Set和Queue等。
 // b ---------------------------------查 get() 或 elementAt()
 // no get() 或 elementAt() 方法获取向量中的元素。get() 方法返回一个指定位置的元素
-// o elementAt()方法则返回指定位置的元素对象。
-// o contains() 方法来检查 Vector 中是否包含字符串
+// get(int index)方法在索引值越界时会抛出IndexOutOfBoundsException异常，
+// 而elementAt(int index)方法在索引值越界时不会抛出异常，而是返回一个null值
+// o elementAt(int)方法则返回指定位置的元素对象。
+// o contains(obj) 方法来检查 Vector 中是否包含字符串
 // o indexOf(Object o)方法：返回向量中第一个出现指定元素的索引位置，如果未找到，则返回-1。
 // o lastIndexOf(Object o)方法：后向前返回向量中最后一个出现指定元素的索引位置，如果未找到，则返回-1。
 // b -----------------------------------改 set() 或 insertElementAt()
-// o set() 或 insertElementAt() 方法修改向量中的元素。set() 方法将指定位置的元素替换为新元素，并返回被替换的元素，
-// no insertElementAt() 方法则将新元素插入到指定位置，并将原位置的元素向后移动一个位置。
-
-
+// o set(int,element)或 insertElementAt(,) 方法修改向量中的元素。set(,)
+// 方法将指定位置的元素替换为新元素，并返回被替换的元素，
+// no insertElementAt(,) 方法则将新元素插入到指定位置，并将原位置的元素向后移动一个位置。
 
 class Vector1 {
     public static void main(String[] args) {
@@ -314,24 +325,40 @@ class Vector1 {
         vec.addElement(st + "???");// 使用addElement添加初始化
         Vector<Integer> veci = new Vector<>(1);
         veci.addElement(1);// 增
-       Boolean b= veci.add(2);
-       veci.add(2);
+        Boolean b = veci.add(2);
+        veci.add(2);
         System.out.println("\n--------------------------增");
         System.out.println("向量需要new创建对象并用<>声明类型 \naddelement添加元素()" + vec);
-        System.out.println(b+"add(int,obj)添加并返回布尔状态"+veci);//布尔不能直接加向量
+        System.out.println(b + ".add(int,obj)添加并返回布尔状态" + veci);// 布尔不能直接加向量
         vec.insertElementAt("Excuse", 0);
-        System.out.println("插入insertElement(obj,int)" + vec);
-        System.out.println("--------------------------删");//删
-        vec.remove(0);
-        boolean bb=veci.removeElement(2);
+        System.out.println(".insertElement(obj,int)插入 " + vec);
 
-        System.out.println("remove(int)删除元素 "+vec+"\nremoveElementAt(int index)不返回已删除的元素");
-        System.out.println("remove(obj)删除元素 "+veci+bb);
+        System.out.println("--------------------------删");// 删
+        vec.remove(0);
+        boolean bb = veci.removeElement(2);
+        System.out.println(".remove(int)删除元素 " + vec + "\nremoveElementAt(int index)不返回已删除的元素");
+        System.out.println(".remove(obj)删除元素 " + veci + bb);
         veci.removeAllElements();
+        System.out.println(".removeAllElements()删除元素 " + veci);
+        veci.add(2);
+        veci.clear();
+        System.out.println(".clear()删除元素 " + veci);
+        vec.insertElementAt("Excuse", 0);
 
         System.out.println("--------------------------查");
+        vec.elementAt(1);
+        System.out.println(".elementAt(int)  .get(int)返回指定位置的元素对象 " + vec);
+        System.out.println(".contains(obj) 方法来检查 Vector 中是否包含字符串元素" + vec.contains("Meow???"));// 字符需要String对象调用
+        /*
+         * boolean contains = false;
+         * for (int i = 0; i < v.size(); i++) {
+         * if (v.get(i).indexOf('a') != -1) {contains = true;break;} }
+         */
+        System.out.println(".indexOf(Obj)方法：返回向量中第一个出现指定元素的索引位置" + vec.indexOf("Meow???"));// 字符需要String对象调用
+        System.out.println(".lastIndexOf(Obj)法：返回向量中最后出现指定元素的索引位置" + vec.lastIndexOf("Meow???"));
 
         System.out.println("--------------------------改");
+        System.out.println(".set(int,obj) 将指定位置的元素替换为新元素 会返回被替换的元素" + vec.set(1, "Meow") + vec);
 
     }
 }
