@@ -10,8 +10,6 @@ import java.util.Arrays;
 // r 导入Collectors包   collect() 方法收集列表。
 import java.util.stream.Collectors;
 
-import org.w3c.dom.css.ViewCSS;
-
 import java.util.Vector; // 向量
 import java.util.ArrayList;// 向量更新换代
 
@@ -36,7 +34,7 @@ public class Arraystr {
         // b -------------------------------多维数组中可以使用以下方式进行初始化：
         // o 使用大括号和逗号分隔符来初始化多维数组
         // o 使用for循环语句初始化一个二维数组
-        // o 使用Arrays.fill()方法初始化
+        // no 使用Arrays.fill()方法初始化??
         int[][] arrayi = { { 1, 2 }, { 3, 4, 5 }, { 6 } };// 初始化了一个2维数组，第一行有2个元素，第二行有3个元素，第三行有1个元素
         int[][] arrayf = new int[3][3];
         // 使用for循环语句初始化一个3x3的二维数组，并为每个元素赋值为其所在行和列的和。
@@ -58,7 +56,7 @@ public class Arraystr {
         num3x4[1][2] = 0;
         // b ------------------------------System.arraycopy()修改数组多个元素
 
-        // b 嵌入数组System.arraycopy(src ,srcPos ,dest ,destPos ,length) 方法的参数如下
+        // b 嵌入数组System.arraycopy(obj ,int ,obj ,int ,length) 方法的参数如下
         // w (Object src, int srcPos, Object dest, int destPos, int length)
         // g 源数组（Object 类型）：表示要被复制的原始数组。
         // g 源数组起始位置（int 类型）：表示要复制的原始数组的开始位置。
@@ -74,7 +72,7 @@ public class Arraystr {
         // b ---------------------------- 打印整个数组 Arrays类和toString()方法
         System.out.println("-------------------Arrays.toString(nums)方法打印单维" + "\n" + Arrays.toString(nums));
         System.out.println(Arrays.toString(words));
-        // b 打印基本类型数组，可以使用引入的Arrays.stream()方法和引入的IntStream类。
+        // no 打印基本类型数组，可以使用引入的Arrays.stream()方法和引入的IntStream类。
         // Stream API，将数组转换为一个流，然后使用 .boxed() 方法将流中的元素包装成相应的包装类型，如 int 被封装成 Integer。
         // 最后使用.collect方法(Collectors.toList()) 将流中的元素收集到一个列表中。
         int[] arr = { 1, 2, 3, 4, 5 };
@@ -114,9 +112,9 @@ class AverageArray {
 
 // y 获取字符串长度：使用length()方法来获取字符串的长度。如 int length = str.length();
 // g .length() 方法只适用于字符串类型，对于其他类型的数组，如整数数组，应该使用 .length 属性来获取数组的长度。
-// r equals()：判断两个字符串是否相等。sbb对象的引用是否相等
-// o charAt()：获取字符串中指定位置的字符。char charAt(int index)
-// o subString(,)：获取字符串的一个子串。String substring(int beginIndex, int endIndex)
+// r equals(obj)：判断两个字符串是否相等。sbb对象的引用是否相等
+// o charAt(int)：获取字符串中指定位置的字符。char charAt(int index)
+// o subString(,)：获取字符串的一个子串。String substring(int , int )
 // g String sub = str.substring(0, 5);
 // no indexOf()：查询一个字符或子串在字符串中的位置。Builder 和 Buffer需要new创建一个对象来调用该方法。
 
@@ -310,7 +308,7 @@ class Stringsbb {
 // get(int index)方法在索引值越界时会抛出IndexOutOfBoundsException异常，
 // 而elementAt(int index)方法在索引值越界时不会抛出异常，而是返回一个null值
 // o elementAt(int)方法则返回指定位置的元素对象。
-// o contains(obj) 方法来检查 Vector 中是否包含字符串
+// o contains(obj) 方法来检查 Vector 中是否包含字符串  Vector中的contains方法是通过equals方法来判断元素是否相等
 // o indexOf(Object o)方法：返回向量中第一个出现指定元素的索引位置，如果未找到，则返回-1。
 // o lastIndexOf(Object o)方法：后向前返回向量中最后一个出现指定元素的索引位置，如果未找到，则返回-1。
 // b -----------------------------------改 set() 或 insertElementAt()
