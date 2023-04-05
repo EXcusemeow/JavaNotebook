@@ -77,9 +77,45 @@ o 多态（Polymorphism）是指同一方法可以在  不同的类中  具有�
 // g 静态绑定/编译时多态是指在编译时就能确定调用哪个方法，它通常与方法的重载相关。例如，如果一个类中定义了多个同名方法但参数类型或数量不同，
 // g 动态绑定/运行时多态是指在程序运行时才能确定调用哪个方法，它通常与方法的覆盖相关。例如，如果一个父类和一个子类都有同名的方法，且子类重写了父类的方法，
 
+// p -------------------------------终极类与抽象类
+// b ----------------------------final类
+// o final 类不能包含抽象方法或抽象方法块，也不能被继承或包含私有方法，类中的静态变量和静态方法也不能修改，只能 new 关键字来创建实例。
+// g final 类通常被用于实现封装性 final 类不能被继承，因此可以保证该类中的方法和属性不会被其他类误用或修改。
+// g final 类还可以用于实现最终方法，这些方法通常是一些重要的公共方法，需要在整个应用程序中被调用。
+
+// b ----------------------------final方法 不能被子类重写，也不能被修改。
+
+// b final变量 在初始化后不能再被赋值，如果是基本类型的变量，其数值不能改变；如果是引用类型的变量，其指向的对象不能改变，但对象的内容可以改变
+// g final 变量经常和 static 关键字一起使用，作为类常量
+
+// p 抽象类
+// b ------------------------------抽象类是指包含一个或多个抽象方法的类。抽象方法是指没有具体实现的方法，只有声明。
+// 抽象类不能被实例化，只能被继承。抽象类的目的是为了提供一个可以继承的通用的基类，描述了类的行为和功能，而不需要完成类的特定实现。
+// 抽象类可以包含普通的成员变量和成员方法，也可以包含构造方法。如果一个类继承了一个抽象类，那么它必须实现所有的抽象方法，否则它也必须被声明为抽象类。
+// 构造方法，类方法（用 static 修饰的方法）不能声明为抽象方法。
+// p -------------接口
+// b -------------接口 interface
+// Java接口是一种抽象类型，是一组抽象方法的集合，通常用interface关键字来声明。一个类可以通过实现接口的方式来继承接口的抽象方法。接口不是类，不能被实例化，但可以被实现。一个实现接口的类必须实现接口中所有的方法，否则必须声明为抽象类。一个类可以实现多个接口，一个接口也可以继承另一个接口。
+// o 接口使用 interface 声明，可以有可见修饰符（如public）和extends关键字（用于继承其他接口）。
+// r 接口中的属性必须是public static final 公共 静态终极类型的，可以省略这些修饰符，默认为常量，必须赋初始值且不能更改。
+// r 接口中的方法必须是public abstract 公共 类型的，可以省略这些修饰符，
+// o 默认为抽象方法无方法体，除非使用default或static（Java 8及以上）或private（Java 9及以上）修饰，这些方法可以有方法体。
+// r 接口不能有构造方法，不能用于实例化对象，但可以声明引用变量，指向实现接口的类的对象。
+// o 接口可以被类实现，使用 implements 一个类可以实现多个接口，用逗号分隔。实现接口的类必须实现接口中所有的抽象方法，否则必须声明为抽象类。
+// w [可见修饰符] interface 接口名 [extends 父接口名,--,--] { 声明变量; 抽象方法; }
+
+// b ------------实现接口 implements
+// o 类使用implements关键字来实现一个或多个接口，可以在extends关键字之后使用。
+// 类的名称应该遵循类名的命名规则，一般以大写字母开头，由多个有意义的单词组成。
+// 类可以有自己的属性和构造方法，也可以继承父类的属性和构造方法。
+// o 类必须重写接口中的所有抽象方法，除非该类是抽象类。重写的方法必须保持一致的方法名、参数列表和返回值类型，并且不能抛出比接口中更强制性的异常。
+// o 类可以重写接口中的默认方法、静态方法和私有方法，也可以直接调用它们。
+// o 类可以实现多个接口，如果多个接口中有相同的默认方法或常量，那么类必须解决冲突，例如通过指定接口名来调用默认方法或常量。
+// w public class 接口名 implements 父接口,--,--{   }
+
 public class Extends1 {
     public static void main(String[] args) {
-        Animal animal1 = new Animal();// 爹对象  自动调用了animal构造器
+        Animal animal1 = new Animal();// 爹对象 自动调用了animal构造器
         Animal animal2 = new Cat();// 子对象上转型 自动调用了cat构造器
 
         Cat cat = (Cat) animal2;// 下转型
@@ -94,7 +130,9 @@ public class Extends1 {
 
         System.out.println("animal2.getClass()获取类对象" + animal2.getClass());//
         System.out.println("(animal2 instanceof Animal) 实例所属类检查" + (animal2 instanceof Animal));
-  
+        Rect rect = new Rect(10, 20);// 创建抽象类子类对象
+        System.out.println("abstract 抽象类" + rect.getArea());//
+
     }
 
 }
@@ -107,18 +145,20 @@ class Animal {
     public void Sound() {
         System.out.println(" 父类animal叫");
     }
-public void method(){
-    System.out.println("super.method()调用父类方法");
-}
+
+    public void method() {
+        System.out.println("super.method()调用父类方法");
+    }
 }
 
 class Cat extends Animal {
     public Cat() {
-        super();//super()调用父类构造器 
+        super();// super()调用父类构造器
         System.out.println("super()/super(参数)");
     }
+
     public void Sound() {
-        
+
         super.method();// super.调用父类方法
         System.out.println(" 子类猫猫叫");
     }
@@ -128,5 +168,36 @@ class Cat extends Animal {
 class Dog extends Animal {
     public void Sound() {
         System.out.println(" 子类修勾也叫");
+    }
+}
+
+// b ----------------------------------定义一个抽象类 Shape
+abstract class Shape {
+
+    private String color;
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    // 定义一个抽象方法 getArea
+    public abstract double getArea();
+}
+
+// 定义一个继承自 Shape 的子类 Rect
+class Rect extends Shape {
+    // 定义两个私有的成员变量
+    private double length;
+    private double width;
+
+    // 定义一个构造方法
+    public Rect(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    // 实现父类的抽象方法 getArea
+    public double getArea() {
+        return length * width;
     }
 }
