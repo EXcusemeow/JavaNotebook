@@ -71,6 +71,7 @@ public class Arraystr {
         // p 打印整个数组Arrays类和其中的toString()方法。 多维数组deepToString()方法
         // r 使用Arrays.toString()或Arrays.deepToString()方法打印数组时，数组的元素类型必须是对象类型，而不是基本类型。
         // b ---------------------------- 打印整个数组 Arrays类和toString()方法
+        //g new String(byte[] b, int offset, int length)方法将字节数组转换成字符串
         System.out.println("-------------------Arrays.toString(nums)方法打印单维" + "\n" + Arrays.toString(nums));
         System.out.println(Arrays.toString(words));
         // no 打印基本类型数组，可以使用引入的Arrays.stream()方法和引入的IntStream类。
