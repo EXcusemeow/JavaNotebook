@@ -12,7 +12,7 @@
 
 // b ---------------InputStream 输入流类有以下几个抽象方法：
 // 访问数据流默认byte类型
-// o int read()：从输入流中读取 一个 字节的值，并返回其整数值，直到流的末尾，则返回 -1。read()可以用于读取二进制/字符数据
+// o int read()：从输入流中读取 下一个 字节的值，并返回其整数值，直到流的末尾，则返回 -1。read()可以用于读取二进制/字符数据
 // o read(byte[] b) 或 read(char[] c)：从输入流中读取 多个 字节或字符，并将它们存储到字节数组b或字符数组c中，返回实际读取的字节数或字符数，直到流的末尾，返回 -1。??填满整个数组
 // o int read(byte[] b, int off, int len)：从输入流中读取最多 len 个字节，并将它们存储到字节数组 b 中，从偏移量 off 开始 返回实际读取的字节数或字符数，如果已到达流的末尾，则返回 -1。。
 //跳过 监测和关闭
@@ -118,27 +118,44 @@ public class Streamio {
 
 class Io {
     // b ---------------InputStream outputStream
-    InputStream ipt;//使得finally可以有作用域
+    InputStream ipt;// 使得finally可以有作用域
+
     public void wr() {
-        byte[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };// 声明时初始化
-        // g array={1,2,3,4,5,6,7,8,9,};
-        // 如果要给一个已经声明过的数组赋予初始值，不能使用大括号{}，而要使用数组名和下标来指定每个元素的值
+        // byte[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };// 声明时初始化
+        byte[] array = { 066, 065, 67, 68, 69 };// 声明时初始化
+        // 如果要给一个已经声明过的数组 赋予初始值，不能使用大括号{}，而要使用数组名和下标来指定每个元素的值
         // g File file = new File("C:/myfile.txt");//创建文件
         // g FileOutputStream output = new FileOutputStream("C:/myfile.txt", true);
-        try (OutputStream opt = new FileOutputStream(
-                "/Users/excusemeow/Library/CloudStorage/OneDrive-个人/vscode/JavaNotebook/output.txt") /* 自动创建和自动关闭资源 */) {
-            opt.write(array);
-            ipt = new FileInputStream(
-                    "/Users/excusemeow/Library/CloudStorage/OneDrive-个人/vscode/JavaNotebook/input.txt");
-                    ipt.read(array);
-                    System.out.println(ipt + "Feil In/OutputStream");
-        
+        try (OutputStream opt = new FileOutputStream("./output.txt");
+        /* 自动创建和自动关闭资源 */) {
+            
+            opt.write(array);//写入
+            ipt = new FileInputStream("output.txt");// r 在写 后面否则空报错
+
+
+            byte[] i = new byte[10];
+            int byteRead = ipt.read(i);// r 读取到i 返回读取到的字节数
+   
+            while (byteRead != -1) { // ？？？读取过就会无
+                System.out.println("字符集加数字  " + new String(i, 0, byteRead) + Arrays.toString(i));
+                System.out.print("计数"+byteRead);
+                byteRead = ipt.read(i);//无剩余可读取字节数 -1
+                System.out.println("  计数"+byteRead);
+            }
+
+            byte[] ii = new byte[10];
+            ipt.read(ii);
+            System.out.println("输入Feil In/OutputStream" + Arrays.toString(ii) + "  \n" + ipt + opt);//需要重新写入
+
+
         } catch (IOException i) {
 
             i.printStackTrace();
         } finally {
             try {
-                ipt.close();// 需要再次捕捉错误
+                if (ipt != null) {// 不为空
+                    ipt.close(); // 需要再次捕捉错误
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -147,30 +164,3 @@ class Io {
     }
 }
 
-
-class ReadWriteFileExample {
-    public static void main(String[] args) {
-        byte[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9,0};
-
-        try (OutputStream output = new FileOutputStream("output.txt");
-             InputStream input = new FileInputStream("output.txt")) {
-            // 写入文件
-            output.write(array);
-            System.out.print("\n写入");
-
-            // 读取文件
-            byte[] ra = new byte[array.length];
-            int count = input.read(ra);//单字节读取
-            System.out.println("读取！");
-            System.out.println("读取到的字节数：" + count);
-            System.out.print("读取到的数组内容：");
-            System.out.println(Arrays.toString(ra));
-       
-            for (byte b : ra) {
-                System.out.print(b + " ");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
