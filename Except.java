@@ -55,6 +55,12 @@ UnsupportedOperationException	当不支持请求的操作时，抛出该异常�
 //w }
 // o finally块中的代码会在try-catch块执行结束后被执行，即使在try块中有return语句也不会影响finally块中的代码执行。
 // finally块中的代码可以用来释放资源，比如关闭文件、数据库连接、网络连接等，以确保资源得到及时的释放和回收。
+/**
+ *r try-with-resources语句是java中的一种特殊的try语句，它可以声明一个或多个资源，并在语句结束时自动关闭它们。
+ *资源是指必须在程序使用完毕后关闭的对象，例如文件、流、数据库连接等
+ *w try (resource1; resource2; …) { // 代码块，可能会抛出异常 } catch (ExceptionType e) { // 代码块，处理异常 }
+ *其中，resource1, resource2等是要声明的资源，它们必须在括号内初始化
+ */ 
 
 /**
  * b 以下是常见的Java公共异常：
@@ -85,16 +91,16 @@ import java.io.IOException;
 // r 例如
 class Example {
     public static void main(String[] args) {
-       try {
-          throw new Exception("--------------这是一个自定义异常信息");  // 抛出自定义异常
-       }
-       catch(Exception e) {
-          System.out.println(e.getMessage());  // 捕获并输出自定义异常信息
-       }
+        try {
+            throw new Exception("--------------这是一个自定义异常信息"); // 抛出自定义异常
+        } catch (Exception e) {
+            System.out.println(e.getMessage()); // 捕获并输出自定义异常信息
+        }
     }
- } 
+}
+
 public class Except {
-    public static void main(String[] args) throws IOException {//r throws 带s的声明
+    public static void main(String[] args) throws IOException {// r throws 带s的声明
         /**
          * o FileOutputStream是一个JavaIO类，用于写入字节数据到文件中。
          * out是一个变量名，可以根据需求来命名。而null是一个特殊值，表示变量out当前没有指向任何对象。
@@ -103,22 +109,21 @@ public class Except {
 
         // 声明并初始化变量out为null
         FileOutputStream out = null;
-       
+
         try {
             Example.main(args);
             // 创建FileOutputStream对象，并指定文件名为"meow.txt" 目录meow不存在
             out = new FileOutputStream("/Users/excusemeow/Library/CloudStorage/OneDrive-个人/vscode/java/moew/meow.txt");
             // 调用out.write()方法，将字符串转换为字节数组并写入文件中
             out.write("Hello, world!".getBytes());
-          
 
             // 捕获异常，并输出异常信息
         } catch (FileNotFoundException e) {
             System.out.println("-------------catch 输出一个file not found错误错误 " + e.getMessage());
-            //o throw new创建异常实例 抛出异常
+            // o throw new创建异常实例 抛出异常
             throw new IOException("------------- throw new IOException 喵喵能做错什么呢");
 
-            //o 捕获throw的 IOException异常，并输出异常信息
+            // o 捕获throw的 IOException异常，并输出异常信息
         } catch (IOException e) {
             // 自动生成的块catch block
             e.printStackTrace();
