@@ -67,6 +67,7 @@ public class Arraystr {
         int num2[] = { 1, 2, 3, 4, 5 };
         System.arraycopy(num2, 0, nums, 2, 5); // o 修改替换元素
         System.out.println("\n---------------嵌入数组System.arraycopy(src ,srcPos ,dest ,destPos ,length) ");
+        
         // p 打印整个数组Arrays类和其中的toString()方法。 多维数组deepToString()方法
         // r 使用Arrays.toString()或Arrays.deepToString()方法打印数组时，数组的元素类型必须是对象类型，而不是基本类型。
         // b ---------------------------- 打印整个数组 Arrays类和toString()方法
