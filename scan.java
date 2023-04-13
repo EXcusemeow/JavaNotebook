@@ -69,7 +69,7 @@ public class scan {
  * DecimalFormat df = new DecimalFormat("0.00");
  * b 格式化为带千位分隔符、保留两位小数的字符串
  * df = new DecimalFormat("#,##0.00");
- * b 格式化为带货币符号、带千位分隔符、保留两位小数的字符串
+ * no 格式化为带货币符号、带千位分隔符、保留两位小数的字符串
  * df = new DecimalFormat("¤#,##0.00");
  */
 // p -------------------------Numberformat 格式化输出
@@ -79,22 +79,40 @@ public class scan {
 // double num = 12345.67;
 // String formattedNum = numberFormat.format(num);
 // System.out.println(formattedNum); // 输出：12,345.67
+// String s = String.format("%d + %d = %d", 1, 2, 3); // 格式化整数
+// System.out.println(s); // 输出 1 + 2 = 3
+// no 不同的转换字符可以表示不同的数据类型，如下表所示：
+
+// 转换字符	数据类型	输出
+// %a	浮点数（除了BigDecimal）	十六进制浮点数
+// %b	任意类型	true或false
+// %c	字符	Unicode字符
+// %d	整数（包括byte, short, int, long, bigint）	十进制整数
+// %e	浮点数	科学计数法
+// %f	浮点数	十进制浮点数
+// %g	浮点数	根据精度和值选择十进制或科学计数法
+// %h	任意类型	hashCode()方法返回的十六进制字符串
+// %n	无	平台相关的换行符
+// %o	整数（包括byte, short, int, long, bigint）	八进制整数
+// %s	任意类型	字符串值
+// %t	日期/时间（包括long, Calendar, Date和TemporalAccessor）
+// %x	整数（包括byte, short, int, long, bigint）	十六进制整数
 // b NumberFormat.parse() 方法可将本地化的字符串解析为数字。
 // String str = "12,345.67";
 // double num = numberFormat.parse(str).doubleValue();
 // System.out.println(num); // 输出：12345.67
 // b NumberFormat.setGroupingUsed() 方法可设置是否启用分组（即千位分隔符）。
 // numberFormat.setGroupingUsed(false); // 禁用分组
-// NumberFormat.setMaximumFractionDigits() 和
 
-// NumberFormat.setMinimumFractionDigits() 方法可设置小数部分的最大和最小位数。
+//g NumberFormat.setMaximumFractionDigits() 和
+//g NumberFormat.setMinimumFractionDigits() 方法可设置小数部分的最大和最小位数。
 // numberFormat.setMaximumFractionDigits(2); // 小数部分最多两位
 // numberFormat.setMinimumFractionDigits(2); // 小数部分最少两位
 
 // b NumberFormat.setRoundingMode() 方法可设置舍入模式。
 // numberFormat.setRoundingMode(RoundingMode.HALF_UP); // 四舍五入
 
-// r ---------------------------- NumberFormart返回实例 不能实例化
+// r ---------------------------- NumberFormart返回实例 不能new实例化
 // o NumberFormat.getInstance() 方法可返回默认的NumberFormat实例，它基于默认的本地化设置。o
 class Numfor {
     // 类的构造器
