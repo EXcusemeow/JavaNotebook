@@ -7,7 +7,7 @@
 // 数组在内存中是连续存储的，所以可以通过下标来快速访问数组中的元素。
 // r 导入arrays包
 import java.util.Arrays;
-// r 导入Collectors包   collect() 方法收集列表。
+//  导入Collectors包   collect() 方法收集列表。
 import java.util.stream.Collectors;
 
 import java.util.Vector; // 向量
