@@ -4,9 +4,9 @@ java从入门到入门笔记 (*´・ω・`)⊃ --O<br>
 使用了 Better [Comments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)见附
 1. NoteApp.java       java基础组成部分
 2. scan.java          简单输入输出
-3. PassValueTest.java 参数值传送方法
-4. Except.java        异常处理
-5. Arraystr.java      数组创建和访问
+3. Except.java        异常处理
+4. Arraystr.java      数组创建和访问
+5. PassValueTest.java 参数值传送方法
 6. Extends1.java      继承和多态
 7. Streamio.java      输入输出流
 8. Thread1.java       多线程
