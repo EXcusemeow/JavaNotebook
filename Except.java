@@ -82,7 +82,7 @@ ConcurrentModificationException（并发修改异常）：当多个线程同时�
 //r 使用 throw 抛出异常时，方法必须使用 throws 关键字声明它可能会抛出的异常类型
 //r 使用 throw 需要配合 try 抛出 catch处理  throw new创建异常实例
 //r 或由调用方法者处理 需要方法子句 throws 自定义异常类型 throw new创建异常实例
-//例如 public static error2() throws IOException 
+//w 如 public static error2() throws IOException 
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -111,7 +111,7 @@ public class Except {
         FileOutputStream out = null;
 
         try {
-            Example.main(args);
+            Example.main(args);//调用Example程序入口
             // 创建FileOutputStream对象，并指定文件名为"meow.txt" 目录meow不存在
             out = new FileOutputStream("/Users/excusemeow/Library/CloudStorage/OneDrive-个人/vscode/java/moew/meow.txt");
             // 调用out.write()方法，将字符串转换为字节数组并写入文件中
@@ -120,6 +120,7 @@ public class Except {
             // 捕获异常，并输出异常信息
         } catch (FileNotFoundException e) {
             System.out.println("-------------catch 输出一个file not found错误错误 " + e.getMessage());
+           
             // o throw new创建异常实例 抛出异常
             throw new IOException("------------- throw new IOException 喵喵能做错什么呢");
 
@@ -134,6 +135,7 @@ public class Except {
                     out.close();// close方法也可能抛出IOException异常，因此需要在finally块中进行处理
                 } catch (IOException e) {
                     // 捕获IOException异常，并处理异常（通常不需要处理，只需记录日志即可）
+                    e.printStackTrace();
                 }
             }
         }
