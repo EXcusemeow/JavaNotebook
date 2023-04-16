@@ -337,7 +337,7 @@ class Vector1 {
         vec.remove(0);
         boolean bb = veci.removeElement(2);
         System.out.println(".remove(int)删除元素 " + vec + "\nremoveElementAt(int index)不返回已删除的元素");
-        System.out.println(".remove(obj)删除元素 " + veci + bb);
+        System.out.println(".remove(obj)删除元素 " + veci + bb);//boolean
         veci.removeAllElements();
         System.out.println(".removeAllElements()删除元素 " + veci);
         veci.add(2);
