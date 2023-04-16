@@ -56,7 +56,8 @@
 */
 // 常用方法继承自In/OutputStream  同上 但是不支持mark() reset()
 // b ----------------------------------------------------filter过滤器数据流??
-//y 缓冲区数据流BufferedInputStream和BufferedOutputStream，用于为其他输入输出流提供缓冲功能，减少速度差异提高读写效率。
+//  b 使用bufferedoutputstream和bufferedinputstream可以减少访问磁盘或网络的次数，从而提高文件或网络通信的性能。
+//y 缓冲区数据流 BufferedInputStream和BufferedOutputStream，用于为其他输入输出流提供缓冲功能，减少速度差异提高读写效率。
 /**
  * o 创建一个新的字节缓冲输入流 不带缓冲区大小即为默认大小
 * BufferedInputStream (InputStream in);
@@ -66,7 +67,7 @@ BufferedOutputStream (OutputStream out);
 BufferedOutputStream (OutputStream out, int size);
  */
 // r 关闭需要先flush()强制输出
-//y 数据数据流DataInputStream和DataOutputStream，用于读写基本数据类型和字符串类型的数据。
+//y 数据数据流 DataInputStream和DataOutputStream，用于读写基本数据类型和字符串类型的数据。
 // DataInputStream和DataOutputStream 用于读写基本数据类型的数据流类。它们可以从底层的输入流或输出流中读取或写入字节，并将其转换为Java中的boolean、byte、short、int、long、float、double或String等类型
 //o DataInputStream和DataOutputStream的创建方式是使用一个已存在的输入流或输出流作为参数，构造一个新的数据流对象
 //g 可以使用以下代码创建一个DataInputStream对象，从标准输入流中读取数据：
@@ -126,7 +127,7 @@ BufferedOutputStream (OutputStream out, int size);
 *o BufferedReader：从缓冲区中读取字符数据，提高效率。
 *o InputStreamReader：将字节流转换为字符流，可以指定编码方式。
 * StringReader：从字符串中读取字符数据。
-// b InputStreamReader
+// b ----------------InputStreamReader
 *g 常用的输出字符流的类有：
 * FileWriter：向文件中写入字符数据。
 *o BufferedWriter：向缓冲区中写入字符数据，提高效率。
@@ -148,7 +149,7 @@ InputStreamReader的主要方法有：
 // FileReader(String fileName)：以fileName指定的文件名创建一个FileReader对象。
 // FileReader类继承了InputStreamReader类的所有方法，如read(), close(), ready()等。它还实现了Closeable和Readable接口。
 
-//b OutputStreamWriter的主要方法有：
+//b --------------------OutputStreamWriter的主要方法有：
 // o 构造方法
 *y public OutputStreamWriter (OutputStream out)：使用默认的字符集创建一个OutputStreamWriter对象，向指定的字节输出流中写入数据。
 *y public OutputStreamWriter (OutputStream out, String charsetName)：使用指定的字符集创建一个OutputStreamWriter对象，向指定的字节输出流中写入数据。
@@ -176,7 +177,6 @@ InputStreamReader的主要方法有：
 //no FileWriter(FileDescriptor fd)：以fd指定的文件描述符创建一个FileWriter对象。
 // FileWriter类继承了OutputStreamWriter类的所有方法，如write(), close(), flush(), getEncoding()等。它还可以使用append()方法来追加字符或字符串到文件末尾。
 
-//  b 使用bufferedoutputstream和bufferedinputstream可以减少访问磁盘或网络的次数，从而提高文件或网络通信的性能。
 // b ------------------------------------------- BufferedReader的主要方法有：
 // 基本通用同前
 //  public BufferedReader(Reader in)：构造一个字符缓冲输入流对象，接收一个Reader类的实例。
@@ -196,7 +196,7 @@ InputStreamReader的主要方法有：
 //o 它不会抛出任何输入/输出异常，而是需要使用checkError方法来检查是否有错误发生。
 //o 它具有自动刷新功能，也就是说，如果调用println或printf方法之一，它会强制将所有数据写入到目标输出流中。
 
-//r 要创建一个printwriter对象，我们需要导入java.io.PrintWriter包，然后使用以下构造方法之一：
+//r 要创建一个printwriter对象，我们需要导入java.io.PrintWriter包，然后使用以下 构造方法之一：
 // PrintWriter(OutputStream out)：创建一个新的缓冲输出流，以将数据写入指定的底层输出流。
 // PrintWriter(OutputStream out, boolean autoFlush)：创建一个新的缓冲输出流，以将数据写入指定的底层输出流，并指定是否自动刷新。
 
