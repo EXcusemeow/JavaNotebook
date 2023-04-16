@@ -48,6 +48,9 @@
 // 通过实现Callable接口，实现call ()方法，然后创建Callable实现类的对象，并作为参数传递给FutureTask类的构造器，创建FutureTask对象，并作为参数传递创建的Thread对象Thread类的构造器，来调用start ()方法启动线程。
 // FutureTask类可以用来包装一个Callable或Runnable对象，以便在将来的某个时刻执行，同时可以获取执行结果。它实现了Future接口，可以用来查询任务是否完成、等待任务完成并获取执行结果等。
 
+// Callable和Future是Java中用于创建线程和获取异步结果的两个接口。Callable是一个有返回值的任务，它有一个call()方法，可以抛出异常。Future是一个用于存储异步结果的对象，它有一个get()方法，可以等待Callable完成并返回结果。Future还有一个cancel()方法，可以取消关联的Callable任务。
+// 要创建线程，需要一个Runnable对象。要获取结果，需要一个Future对象。Java库提供了一个实现了Runnable和Future接口的类，叫做FutureTask，它可以用Callable对象作为构造参数，然后传递给Thread对象来创建线程。
+
 //g 这三种方法的优缺点如下：
 // 继承Thread类的方法最简单，但是由于Java只支持单继承，所以如果一个类已经继承了其他类，就不能再继承Thread类了。而且这种方法不能实现多个线程共享同一个资源的目的。
 // 实现Runnable接口的方法更灵活，可以避免单继承的局限性，也可以实现多个线程共享同一个资源的目的。但是这种方法不能让线程有返回值，也不能让线程抛出异常。
@@ -98,11 +101,13 @@ public class Thread1 {
     public static void main(String[] args) {
         // 定义一个共享的锁对象
         Object lock = new Object();
+        
         // 创建一个MyThread类的线程
         MyThread thread = new MyThread(lock);
         // 创建一个MyRunnable类的线程
         MyRunnable runnable = new MyRunnable();
         Thread thread1 = new Thread(runnable);
+        
         // 创建一个MyCallable类的线程
         // 在main 方法中将 MyThread 线程的 ID 传递给 MyCallable类的构造方法，这样就可以根据这个 ID 来唤醒线程。
         MyCallable callable = new MyCallable(lock, thread.getId());// Thread.currentThread().getId()替代过时getId()
@@ -132,7 +137,7 @@ class MyThread extends Thread {
             for (int i = 0; 5 > i; i++) {
                 System.out.println("thread t1  " + i);
                 // 在synchronized代码块中调用wait方法
-                synchronized (lock) {
+                
                     if (i == 0) {
                         try {
                             System.out.println("thread t1  等待");
@@ -141,7 +146,7 @@ class MyThread extends Thread {
                             e.printStackTrace();
                         }
                     }
-                }
+                
             }
         }
     }
@@ -161,6 +166,7 @@ class MyRunnable implements Runnable {
 class MyCallable implements Callable<String> {
     // 接收一个锁对象和一个要唤醒的线程ID
     private Object lock;
+    // 应该传入的是 MyThread 线程对象的引用，而不是线程 ID。??
     private long threadId;// 因为wait和notify方法必须使用同一个锁对象，而且在调用wait和notify方法时，必须是同一个线程，否则会抛出IllegalMonitorStateException异常。
 
     public MyCallable(Object lock, long threadId) {
@@ -168,7 +174,7 @@ class MyCallable implements Callable<String> {
         this.threadId = threadId;// MyCallable需要知道要唤醒哪个线程的ID，才能在正确的锁对象上调用notify方法，唤醒指定的线程。
     }
 
-    public synchronized String call() {
+    public  String call() {
         // 线程执行逻辑
         synchronized (lock) {
             for (int i = 0; 5 > i; i++) {
@@ -190,7 +196,7 @@ class MyCallable implements Callable<String> {
                     }
                 }
             }
-        }
+        }//
         return "result";
     }
 }
