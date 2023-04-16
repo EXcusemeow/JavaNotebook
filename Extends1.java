@@ -67,7 +67,7 @@ o 多态（Polymorphism）是指同一方法可以在  不同的类中  具有�
 // 在运行时，当通过父类引用调用覆盖方法时，实际上执行的是子类中定义的方法。这种行为被称为多态性（Polymorphism），它允许在运行时选择要执行的方法。
 // b super()调用父类构造方法
 // o super.用于在子类中可以引用父类的成员变量和方法。
-// r super()子类构造方法中用于调用父类构造函数的关键字，在子类的构造方法的第一行使用
+// r super() 子类构造方法中 用于调用父类构造函数 ，在子类的构造方法的第一行使用
 // g 子类中定义了构造方法 必须在构造方法中使用super()关键字显式地调用父类构造方法，或省略super关键字调用父类的无参构造方法。
 // 当创建子类对象时，Java会自动调用父类的无参构造方法，如果父类没有无参构造方法，或者希望使用父类中的其他构造方法来初始化子类对象，就需要使用super关键字显式地调用父类构造方法。
 // 父类对象的初始化是在子类对象初始化之前的。当创建一个子类对象时，Java会先调用父类的构造方法来初始化父类对象，然后再调用子类的构造方法来初始化子类对象。如果不先初始化父类对象，那么子类就无法使用父类中定义的实例变量和方法。因此，Java规定必须先初始化父类对象，再初始化子类对象。
@@ -115,10 +115,12 @@ o 多态（Polymorphism）是指同一方法可以在  不同的类中  具有�
 /**
  * 而父类和接口中有同名的方法，那么子类应该如何区分和调用这些方法。这个问题的答案取决于父类和接口中的方法是什么类型的方法，例如：
  * 
- *g 如果父类和接口中的方法都是静态方法，那么子类可以直接通过父类名或者接口名来调用它们，不会产生冲突。例如，Father.hobby()或者InterfaceA.hobby()。
- *g 如果父类和接口中的方法都是非静态方法，那么子类需要重写这些方法，否则会产生编译错误。子类重写的方法会覆盖父类和接口中的同名方法。
- * 或者子类想要调用父类或者接口中的原始方法，可以使用super或者 接口名.super来指定。例如，super.drink()或者InterfaceA.super.drink()。
- *g 如果父类和接口中的方法有一个是静态的，另一个是非静态的，那么子类可以直接通过父类名或者接口名来调用静态方法，也可以直接调用非静态方法。
+ * g
+ * 如果父类和接口中的方法都是静态方法，那么子类可以直接通过父类名或者接口名来调用它们，不会产生冲突。例如，Father.hobby()或者InterfaceA.hobby()。
+ * g 如果父类和接口中的方法都是非静态方法，那么子类需要重写这些方法，否则会产生编译错误。子类重写的方法会覆盖父类和接口中的同名方法。
+ * 或者子类想要调用父类或者接口中的原始方法，可以使用super（）或者
+ * 接口名.super来指定。例如，super.drink()或者InterfaceA.super.drink()。
+ * g 如果父类和接口中的方法有一个是静态的，另一个是非静态的，那么子类可以直接通过父类名或者接口名来调用静态方法，也可以直接调用非静态方法。
  * 或者子类想要重写非静态方法，可以自由选择是否覆盖父类或者接口中的同名方法。例如，Father.hobby()或者InterfaceA.hobby()，以及drink()或者InterfaceA.super.drink()。
  */
 public class Extends1 {
@@ -146,7 +148,7 @@ public class Extends1 {
     }
 
 }
-
+// 父类
 class Animal {
     public Animal() {
         System.out.println("super() 调用父类构造器 ");
@@ -160,7 +162,7 @@ class Animal {
         System.out.println("super.method()调用父类方法");
     }
 }
-
+// 子类
 class Cat extends Animal {
     public Cat() {
         super();// super()调用父类构造器
@@ -168,7 +170,6 @@ class Cat extends Animal {
     }
 
     public void Sound() {
-
         super.method();// super.调用父类方法
         System.out.println(" 子类猫猫叫");
     }
@@ -178,7 +179,7 @@ class Cat extends Animal {
 // y extends 继承 animal类和dog 接口 implements
 class Dog extends Animal implements Dogif {
     public void Sound() {
-        System.out.println(" 子类修勾也叫"+name);
+        System.out.println(" 子类修勾也叫" + name);
     }
 }
 
@@ -216,7 +217,7 @@ class Rect extends Shape {
 
 // b ---------------------接口interface / implements
 interface Dogif {
-    public static final String name = "修勾的修勾";//默认static final 可省略
+    public static final String name = "修勾的修勾";// 默认static final 可省略
 
     void Sound();// 公共抽象方法
 
