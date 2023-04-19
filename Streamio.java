@@ -67,7 +67,7 @@ BufferedOutputStream (OutputStream out);
 BufferedOutputStream (OutputStream out, int size);
  */
 // r 关闭需要先flush()强制输出
-//y 数据数据流 DataInputStream和DataOutputStream，用于读写基本数据类型和字符串类型的数据。
+//b 数据数据流 DataInputStream和DataOutputStream，用于读写基本数据类型和字符串类型的数据。
 // DataInputStream和DataOutputStream 用于读写基本数据类型的数据流类。它们可以从底层的输入流或输出流中读取或写入字节，并将其转换为Java中的boolean、byte、short、int、long、float、double或String等类型
 //o DataInputStream和DataOutputStream的创建方式是使用一个已存在的输入流或输出流作为参数，构造一个新的数据流对象
 //g 可以使用以下代码创建一个DataInputStream对象，从标准输入流中读取数据：
@@ -80,6 +80,7 @@ BufferedOutputStream (OutputStream out, int size);
 // read(byte[] b)：从输入流中读取一定数量的字节到字节数组b中。
 //o readBoolean()、readByte()、readShort()、readInt() readChar()等：从输入流中读取一个字节或两个字节，并转换为对应的基本数据类型。
 //o readLine()和writeBytes()方法，用于读写字符串。
+//r readLine()可以读取不同类型
 //o readUTF()和writeUTF()方法，用于读写UTF-8编码的字符串。
 //o flush(),close()方法，用于刷新和关闭数据流并释放资源
 // b -------------------------------ObjectInputStream反序列化  和ObjectOutputStream序列化 对象流
@@ -219,6 +220,7 @@ InputStreamReader的主要方法有：
 //o checkError()：检查输出流中是否有错误，并返回布尔结果。
 // p ----------文件处理
 // b ---------------------------------------File类是Java标准库中的一个类，它表示文件和目录的路径名的抽象表示。使用File类，可以在Java中对文件和目录进行操作，例如创建、删除、重命名、遍历等。
+// Java File类是java.io包中的一个类，它用于表示文件和目录的抽象路径名。你可以通过File类来创建、删除、重命名、查找文件和目录，以及获取它们的属性信息，但不能用它来读写文件内容。
 
 //r File类有多个构造函数，其中常用的是以下几种：
 //o File(String pathname)：通过给定的文件路径字符串构造File对象。
@@ -255,8 +257,8 @@ InputStreamReader的主要方法有：
 // o 随机访问文件是指可以在文件中的任意位置读写数据的一种方式。Java.io包提供了RandomAccessFile类来实现这个功能。1
 
 //o RandomAccessFile类有两个构造方法，可以指定文件名和访问模式。
-// RandomAccessFile(File file, String mode)：以file指定的文件名和mode指定的访问模式创建一个随机访问文件流。
-// RandomAccessFile(String name, String mode)：以name指定的文件名和mode指定的访问模式创建一个随机访问文件流。
+//w RandomAccessFile(File file, String mode)：以file指定的文件名和mode指定的访问模式创建一个随机访问文件流。
+//w RandomAccessFile(String name, String mode)：以name指定的文件名和mode指定的访问模式创建一个随机访问文件流。
 //r 访问模式有四种，分别是：
 // r：表示以只读方式打开文件。
 // rw：表示以读写方式打开文件，如果文件不存在，则创建该文件。
@@ -414,6 +416,7 @@ class Rw {
                 while ((ln = bf.readLine()) != null) {
                     System.out.print(ln);
                 }
+                System.out.println("");
                 pw.close();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -430,11 +433,30 @@ class Rw {
     }
 }
 
+class RandomAccessF {
+    public RandomAccessF() {
+        try (RandomAccessFile raf = new RandomAccessFile("JavaNotebook/random.txt", "rw")) // 自动关闭资源
+        {
+            raf.seek(2);// 指针运动
+            raf.write('a');
+            raf.write(65);// 字符集A的码
+            raf.write('1');
+            raf.writeUTF("Meow?");//utf字符串
+            raf.seek(0);// 指针运动以读取
+            System.out.println("----------RandomAccessFile随机读写");  
+            System.out.println(raf.readLine());    
+            } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
 public class Streamio {
     public static void main(String[] args) {
         Io io = new Io();
         io.wr();// In/OutputStream
         Obj ob = new Obj();
         Rw rw = new Rw();
+        RandomAccessF raf = new RandomAccessF();
     }
 }
