@@ -10,6 +10,7 @@ java从入门到入门笔记 (*´・ω・`)⊃ --O<br>
 6. Extends1.java      [继承和多态](Extends1.java )
 7. Streamio.java      [输入输出流](Streamio.java)
 8. Thread1.java       [多线程](Thread1.java)
+9. Gui.java           [awt,swing](Gui.java)
 
 <p style="color:red ">以下参数可以复制替换到 拓展设置-- 在setting.json中编辑</p>
 替换 "better-comments.tags": [  后面的内容
